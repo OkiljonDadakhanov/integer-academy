@@ -8,7 +8,7 @@ const InstructorSection = () => {
     {
       name: "Xabibulloyev Ixtiyorxon",
       role: "Java dasturlash kursi mentori",
-      bio: "Bolalarga robot qurishni va dasturlashni o'rgatishda 7+ yillik tajribaga ega robotika muhandisi.",
+      bio: "2+ yillik tajribaga ega Java dasturlash mentori. U Java asoslari va OOP konsepsiyalarini tushunarli va tizimli tarzda o‘rgatadi.",
       image: "/images/Ixtiyorxon.jpg",
       links: {
         linkedin: "#",
@@ -18,7 +18,7 @@ const InstructorSection = () => {
     {
       name: "Abduqahhorov Abduqahhor",
       role: "Mobil dasturlash kursi mentori",
-      bio: "Yoshlar uchun ijodiy web dasturlash o'rgatishga ishtiyoqli frontend dasturchi.",
+      bio: "Abduqahhor mobil ilovalar yaratish, foydalanuvchi interfeysi dizayni va platformalarga moslashtirilgan dasturlash bo‘yicha chuqur bilim va amaliy tajriba bilan bo‘lishadi.",
       image: "/images/Abduqahhor.jpg",
       links: {
         linkedin: "#",
@@ -38,8 +38,8 @@ const InstructorSection = () => {
     {
       name: "Isroilov Mavlonbek",
       role: " .NET dasturlash kursi mentori",
-      bio: "Murakkab tushunchalarni interaktiv ta'lim tajribalari orqali yorituvchi AI tadqiqotchisi.",
-      image: "https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHByb2ZpbGUlMjBwaWN0dXJlJTIwd29tYW58ZW58MHx8MHx8fDI%3D&auto=format&fit=crop&w=800&q=60",
+      bio: "Mavlonbek .NET dasturlash kursi mentori bo‘lib, u o‘quvchilarga C#, ASP.NET va .NET platformasida zamonaviy veb-ilovalar yaratish bo‘yicha nazariy va amaliy bilimlarni yetkazadi.",
+      image: "/images/mavlonbek.jpg",
       links: {
         linkedin: "https://www.linkedin.com/in/mavlonbekisroilov/",
         github: "https://github.com/mavlonbekcoding"

@@ -10,8 +10,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="h-8 w-8 rounded-lg bg-integer-blue flex items-center justify-center">
-                <span className="text-white font-bold text-sm">I</span>
+              <div className="h-11 w-11 rounded-lg bg-white flex items-center justify-center">
+              <img src="/logo/integer.png" alt="logo" width={65} height={65} />
               </div>
               <span className="font-bold text-lg text-white">Integer</span>
             </div>

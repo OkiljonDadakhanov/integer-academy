@@ -85,18 +85,13 @@ interface AlertDescriptionProps {
 
 // Data
 const courses = [
-  { name: "Arab tili", description: "Fonetika, CEFR, Xorijiy ustoz" },
+  { name: "Robototexnikaga kirish", description: "Robototexnika asoslarini o'rganing va birinchi robotingizni yarating" },
   { name: "Ingliz tili", description: "General English, IELTS" },
-  { name: "Rus tili", description: "" },
-  { name: "Turk tili", description: "grammatika, CEFR" },
-  { name: "Bilag'on bolajor", description: "Maktabga tayyorlov" },
-  { name: "Logoped yakka mashg'ulotlari", description: "" },
-  { name: "Arxitektura va interyer dizayn kursi", description: "" },
-  { name: "3ds Max va AutoCAD kursi", description: "" },
-  { name: "Xattotlik", description: "" },
-  { name: "Mental arifmetika", description: "Ментал арифметика" },
-  { name: "Kompyuter savodxonligi", description: "Word, Excel, Windows" },
-  { name: "Matematika", description: "Imtihonga tayyorgarlik" },
+  { name: "Rus tili", description: "Boshlang'ich Rus Tili" },
+  { name: "Web dasturlash asoslari", description: "HTML, CSS va JavaScript yordamida o'z web-saytingizni yarating" },
+  { name: "Python dasturlash tili", description: "O'yinlar va dasturlar orqali Python dasturlash tilini o'rganing" },
+  { name: "AI va Machine Learning", description: "Sun'iy intellekt va machine learning asoslarini kashf eting" },
+  
 ];
 
 const locations = [
@@ -110,7 +105,7 @@ const locations = [
   { name: "Namangan", region: "Namangan" },
   { name: "Online", region: "Internet" },
   { name: "Qo'qon", region: "Farg'ona" },
-  { name: "Andijon", region: "Andijon" },
+  { name: "Andijon", region: "Andijon Shahar" },
   { name: "Poytug'", region: "Andijon" },
 ];
 
@@ -413,7 +408,7 @@ export default function RegistrationForm(): React.ReactElement {
   const sendToTelegram = async (data: FormData): Promise<void> => {
     try {
       const message = `
-📥 Yangi ariza:
+📥 Yangi kurs uchun ariza:
 👤 Ism: ${data.fullName}
 📞 Telefon: ${data.phone}
 📞 Qo'shimcha: ${

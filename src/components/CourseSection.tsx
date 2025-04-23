@@ -80,8 +80,10 @@ const CourseSection = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <Button variant="outline" size="lg" className="button-hover-effect">
+          <Button asChild  variant="outline" size="lg" className="button-hover-effect">
+            <a href="#courses" className="inline-flex items-center ">
             Barcha kurslarni ko'rish <ChevronRight className="ml-2 h-4 w-4" />
+            </a>
           </Button>
         </div>
       </div>

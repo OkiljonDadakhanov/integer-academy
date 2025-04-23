@@ -173,8 +173,8 @@ const ContactSection = () => {
               <div>
                 <h3 className="text-lg font-medium mb-1">Qo'ng'iroq qiling</h3>
                 <p className="text-muted-foreground">
-                  +998 90 123 4567<br />
-                  Dushanbadan-jumgacha, 9:00 - 18:00
+                +99893 413 45 55<br />
+                 
                 </p>
               </div>
             </div>
@@ -186,8 +186,7 @@ const ContactSection = () => {
               <div>
                 <h3 className="text-lg font-medium mb-1">Email yozing</h3>
                 <p className="text-muted-foreground">
-                  info@integer-tech.uz<br />
-                  support@integer-tech.uz
+                mavlonbekcoding@gmail.com<br />
                 </p>
               </div>
             </div>
