@@ -62,9 +62,10 @@ const ContactSection = () => {
     
     if (!formData.phone.trim() || formData.phone === "+998 ") {
       newErrors.phone = "Telefon raqam kiritish majburiy";
-    } else if (!/^\+998\s\d{2}\s\d{3}\s\d{2}\s\d{2}$/.test(formData.phone)) {
+    } else if (!/^\+998\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}$/.test(formData.phone)) {
       newErrors.phone = "Telefon raqam formati: +998 XX XXX XX XX";
     }
+    
     
     if (!formData.topic.trim()) {
       newErrors.topic = "Mavzu kiritish majburiy";
