@@ -1,5 +1,5 @@
 
-import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Instagram, Youtube, Send   } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -19,18 +19,16 @@ const Footer = () => {
               O'zbekistonda bolalar va yoshlarga qiziqarli va amaliy muhitda haqiqiy texnik ko'nikmalarni o'rgatamiz.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://www.instagram.com/integer_academy/" className="text-gray-400 hover:text-white transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="https://www.youtube.com/channel/UCwJWeQK_LJy6NMOCPRnnkeA" className="text-gray-400 hover:text-white transition-colors">
+                <Youtube  className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Linkedin className="h-5 w-5" />
+              <a href="https://t.me/integeracademy" className="text-gray-400 hover:text-white transition-colors">
+                <Send  className="h-5 w-5" />
               </a>
+
             </div>
           </div>
 

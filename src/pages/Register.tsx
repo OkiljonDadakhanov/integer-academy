@@ -85,12 +85,13 @@ interface AlertDescriptionProps {
 
 // Data
 const courses = [
-  { name: "Robototexnikaga kirish", description: "Robototexnika asoslarini o'rganing va birinchi robotingizni yarating" },
   { name: "Ingliz tili", description: "General English, IELTS" },
   { name: "Rus tili", description: "Boshlang'ich Rus Tili" },
-  { name: "Web dasturlash asoslari", description: "HTML, CSS va JavaScript yordamida o'z web-saytingizni yarating" },
-  { name: "Python dasturlash tili", description: "O'yinlar va dasturlar orqali Python dasturlash tilini o'rganing" },
-  { name: "AI va Machine Learning", description: "Sun'iy intellekt va machine learning asoslarini kashf eting" },
+  { name: "Nemis tili", description: "" },
+  { name: "Robototexnikaga kirish", description: "" },
+  { name: "Web dasturlash asoslari", description: "" },
+  { name: "Python dasturlash tili", description: "" },
+  { name: "AI va Machine Learning", description: "" },
   
 ];
 

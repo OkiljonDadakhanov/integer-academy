@@ -1,9 +1,13 @@
 
 import InstructorCard from './InstructorCard';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 
 
 const InstructorSection = () => {
+
   const instructors = [
     {
       name: "Xabibulloyev Ixtiyorxon",
@@ -47,9 +51,18 @@ const InstructorSection = () => {
     }
   ];
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration in ms
+      once: true,     // Whether animation should happen only once
+    });
+  }, []);
+
   return (
     <section id="instructors" className="py-16">
       <div className="container">
+      <div data-aos="flip-up" data-aos-delay="200">
+
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="section-title">Bizning o'qituvchilarimiz</h2>
           <p className="section-subtitle">
@@ -61,6 +74,7 @@ const InstructorSection = () => {
           {instructors.map((instructor, index) => (
             <InstructorCard key={index} {...instructor} />
           ))}
+        </div>
         </div>
       </div>
     </section>

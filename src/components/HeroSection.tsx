@@ -1,11 +1,23 @@
 import { ChevronRight, Code, Cpu, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 const HeroSection = () => {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration in ms
+      once: true,     // Whether animation should happen only once
+    });
+  }, []);
+
   return (
     <section id="hero" className="pt-24 pb-16 md:pt-32 md:pb-24">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div data-aos="fade-right">
           <div className="space-y-6">
             <div className="inline-block rounded-full bg-integer-blue/10 px-3 py-1 text-sm text-integer-blue font-medium">
               Integer'ga xush kelibsiz
@@ -59,6 +71,9 @@ const HeroSection = () => {
               </p>
             </div>
           </div>
+          </div>
+
+          <div data-aos="fade-left">
 
           <div className="relative">
             <div className="absolute -top-16 -left-16 w-64 h-64 bg-integer-purple/10 rounded-full filter blur-3xl opacity-70"></div>
@@ -115,6 +130,7 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

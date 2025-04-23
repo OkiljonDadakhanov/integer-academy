@@ -3,6 +3,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 interface FormData {
   fullName: string;
@@ -140,9 +143,22 @@ const ContactSection = () => {
     setErrors({});
   };
 
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration in ms
+      once: true,     // Whether animation should happen only once
+    });
+  }, []);
+
+
   return (
     <section id="contact" className="py-16 bg-gray-50">
       <div className="container">
+
+      <div data-aos="fade-up"
+     data-aos-duration="3000">
+
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="section-title">Bog'lanish</h2>
           <p className="section-subtitle">
@@ -290,6 +306,7 @@ const ContactSection = () => {
               </form>
             )}
           </div>
+        </div>
         </div>
       </div>
     </section>
