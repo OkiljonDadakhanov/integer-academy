@@ -1,10 +1,145 @@
-
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useState } from 'react';
+
+interface FormData {
+  fullName: string;
+  phone: string;
+  topic: string;
+  message: string;
+}
+
+interface ValidationErrors {
+  fullName?: string;
+  phone?: string;
+  topic?: string;
+  message?: string;
+}
 
 const ContactSection = () => {
+  const [formData, setFormData] = useState<FormData>({
+    fullName: "",
+    phone: "+998 ",
+    topic: "",
+    message: "",
+  });
+  
+  const [errors, setErrors] = useState<ValidationErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  
+  // Telegram configuration
+  const TELEGRAM_BOT_TOKEN = "8001104074:AAGr-1zQ9SH-2JclhKtO0dgp-0D0YCnv0Lk";
+  const TELEGRAM_CHAT_ID = "-1002645858733";
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // Clear error when user starts typing
+    if (errors[name as keyof ValidationErrors]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: undefined
+      }));
+    }
+  };
+  
+  const validateForm = (): boolean => {
+    const newErrors: ValidationErrors = {};
+    
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = "Ism kiritish majburiy";
+    }
+    
+    if (!formData.phone.trim() || formData.phone === "+998 ") {
+      newErrors.phone = "Telefon raqam kiritish majburiy";
+    } else if (!/^\+998\s\d{2}\s\d{3}\s\d{2}\s\d{2}$/.test(formData.phone)) {
+      newErrors.phone = "Telefon raqam formati: +998 XX XXX XX XX";
+    }
+    
+    if (!formData.topic.trim()) {
+      newErrors.topic = "Mavzu kiritish majburiy";
+    }
+    
+    if (!formData.message.trim()) {
+      newErrors.message = "Xabar kiritish majburiy";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  
+  const sendToTelegram = async () => {
+    try {
+      const text = `
+📝 Yangi Bog'lanish:
+👤 Ism: ${formData.fullName}
+📞 Telefon: ${formData.phone}
+📌 Mavzu: ${formData.topic}
+💬 Xabar: ${formData.message}
+      `;
+      
+      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: text,
+          parse_mode: 'HTML'
+        }),
+      });
+      
+      const data = await response.json();
+      return data.ok;
+    } catch (error) {
+      console.error('Error sending to Telegram:', error);
+      return false;
+    }
+  };
+  
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    try {
+      const success = await sendToTelegram();
+      if (success) {
+        setIsSuccess(true);
+      } else {
+        alert("Xabar yuborish paytida xatolik yuz berdi. Iltimos, keyinroq urinib ko'ring.");
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert("Xabar yuborish paytida xatolik yuz berdi. Iltimos, keyinroq urinib ko'ring.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  
+  const resetForm = () => {
+    setIsSuccess(false);
+    setFormData({
+      fullName: "",
+      phone: "+998 ",
+      topic: "",
+      message: "",
+    });
+    setErrors({});
+  };
+
   return (
     <section id="contact" className="py-16 bg-gray-50">
       <div className="container">
@@ -59,63 +194,102 @@ const ContactSection = () => {
           </div>
 
           <div>
-            <form className="space-y-4 bg-white p-6 rounded-lg shadow-sm">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">
-                    Ism
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    placeholder="Ismingiz"
-                    required
-                  />
+            {isSuccess ? (
+              <div className="text-center p-8 max-w-md mx-auto bg-white rounded-lg shadow-sm">
+                <h2 className="text-2xl font-bold text-green-600 mb-4">Rahmat!</h2>
+                <p className="mb-4 text-gray-700">
+                  Sizning arizangiz muvaffaqiyatli yuborildi. Tez orada siz bilan bog'lanamiz!
+                </p>
+                <Button 
+                  onClick={resetForm}
+                  className="bg-green-600 hover:bg-green-700"
+                >
+                  Yangi ariza qoldirish
+                </Button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-lg shadow-sm">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label htmlFor="fullName" className="text-sm font-medium">
+                      Ism
+                    </label>
+                    <Input
+                      id="fullName"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      placeholder="Ismingiz"
+                      className={errors.fullName ? "border-red-500" : ""}
+                    />
+                    {errors.fullName && (
+                      <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>
+                    )}
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label htmlFor="phone" className="text-sm font-medium">
+                      Telefon raqam
+                    </label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="+998 XX XXX XX XX"
+                      className={errors.phone ? "border-red-500" : ""}
+                    />
+                    {errors.phone && (
+                      <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+                    )}
+                  </div>
                 </div>
-                
+
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">
-                    Email
-                  </label>
+                  <label htmlFor="topic" className="text-sm font-medium">
+                    Mavzu
+                  </label> 
                   <Input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    placeholder="Telefon raqamingiz"
-                    required
+                    id="topic"
+                    name="topic"
+                    value={formData.topic}
+                    onChange={handleChange}
+                    placeholder="Xabar mavzusi"
+                    className={errors.topic ? "border-red-500" : ""}
                   />
+                  {errors.topic && (
+                    <p className="text-red-500 text-xs mt-1">{errors.topic}</p>
+                  )}
                 </div>
-              </div>
 
-              <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium">
-                  Mavzu
-                </label> 
-                <Input
-                  id="subject"
-                  name="subject"
-                  placeholder="Xabar mavzusi"
-                  required
-                />
-              </div>
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm font-medium">
+                    Xabar
+                  </label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Xabaringizni yozing"
+                    rows={5}
+                    className={errors.message ? "border-red-500" : ""}
+                  />
+                  {errors.message && (
+                    <p className="text-red-500 text-xs mt-1">{errors.message}</p>
+                  )}
+                </div>
 
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">
-                  Xabar
-                </label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Xabaringizni yozing"
-                  rows={5}
-                  required
-                />
-              </div>
-
-              <Button type="submit" className="w-full bg-integer-blue hover:bg-integer-blue/90 button-hover-effect">
-                Xabar Yuborish
-              </Button>
-            </form>
+                <Button 
+                  type="submit" 
+                  className="w-full bg-integer-blue hover:bg-integer-blue/90 button-hover-effect"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Yuborilmoqda..." : "Xabar Yuborish"}
+                </Button>
+              </form>
+            )}
           </div>
         </div>
       </div>
