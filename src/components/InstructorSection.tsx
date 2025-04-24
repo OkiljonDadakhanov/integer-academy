@@ -31,8 +31,8 @@ const InstructorSection = () => {
       bio: "O'quvchilardan IT hamda Robototexnika birgalikda qiziqarli va pedagogik jihatdan interfaol metodikalar orqali o'rgatuvchi mutahasis.",
       image: "/images/Diloromxon.jpg",
       links: {
-        github: "#",
-        linkedin: "#"
+        github: "https://github.com/Diloromxon27",
+        linkedin: "https://uz.linkedin.com/in/diloromxon-yakubova-0670052b4"
       }
     },
     {
@@ -57,7 +57,8 @@ const InstructorSection = () => {
   return (
     <section id="instructors" className="py-16 overflow-x-hidden">
       <div className="px-4 mx-auto max-w-7xl">
-        <div data-aos="flip-up" data-aos-delay="200" className="w-full">
+        <div data-aos="fade-down"
+     className="w-full">
           <div className="text-center max-w-3xl mx-auto mb-12 px-4">
             <h2 className="section-title">Bizning o'qituvchilarimiz</h2>
             <p className="section-subtitle">

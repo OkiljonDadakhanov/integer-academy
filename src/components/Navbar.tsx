@@ -42,33 +42,33 @@ const Navbar = () => {
       >
         <div className="container flex items-center justify-between py-4">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="h-10 w-10 flex items-center justify-center">
               <img src="/logo/integer.png" alt="logo" width={50} height={50} />
             </div>
             <span className="font-bold text-xl">Integer</span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <a
-              href="#courses"
+            <Link
+              to="#courses"
               className="text-foreground hover:text-integer-blue transition-colors"
             >
               Kurslar
-            </a>
-            <a
-              href="#instructors"
+            </Link>
+            <Link
+              to="#instructors"
               className="text-foreground hover:text-integer-blue transition-colors"
             >
               O'qituvchilar
-            </a>
-            <a
-              href="#contact"
+            </Link>
+            <Link
+              to="#contact"
               className="text-foreground hover:text-integer-blue transition-colors"
             >
               Bog'lanish
-            </a>
+            </Link>
             <Link to="/register">
               <Button className="bg-integer-blue hover:bg-integer-blue/90 button-hover-effect">
                 Ro'yhatdan o'tish
@@ -90,27 +90,27 @@ const Navbar = () => {
         {isOpen && (
           <div className="fixed inset-x-0 top-[72px] bottom-0 md:hidden bg-white z-40 overflow-y-auto">
             <div className="container py-4 flex flex-col gap-4">
-              <a
-                href="#courses"
+              <Link
+                to="/#courses"
                 className="text-foreground hover:text-integer-blue transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
                 Kurslar
-              </a>
-              <a
-                href="#instructors"
+              </Link>
+              <Link
+                to="/#instructors"
                 className="text-foreground hover:text-integer-blue transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
                 O'qituvchilar
-              </a>
-              <a
-                href="#contact"
+              </Link>
+              <Link
+                to="/#contact"
                 className="text-foreground hover:text-integer-blue transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
                 Bog'lanish
-              </a>
+              </Link>
               <Link to="/register" onClick={() => setIsOpen(false)}>
                 <Button className="bg-integer-blue hover:bg-integer-blue/90 w-full">
                   Ro'yhatdan o'tish

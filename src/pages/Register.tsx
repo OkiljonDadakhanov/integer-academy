@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Phone, AlertCircle } from "lucide-react";
-import Navbar from "@/components/Navbar"; // Import the Navbar component
-import Footer from "@/components/Footer"; // Import the Footer component
+import Navbar from "@/components/Navbar"; 
+import Footer from "@/components/Footer";
+import AOS from "aos"; // Import AOS library
+import "aos/dist/aos.css"; // Import AOS styles
 
 // Define TypeScript interfaces
 interface Course {
@@ -33,7 +35,7 @@ interface ValidationErrors {
   general?: string;
 }
 
-// Component Props
+// Component Props interfaces remain the same
 interface ButtonProps {
   children: React.ReactNode;
   style?: React.CSSProperties;
@@ -92,7 +94,6 @@ const courses = [
   { name: "Web dasturlash asoslari", description: "" },
   { name: "Python dasturlash tili", description: "" },
   { name: "AI va Machine Learning", description: "" },
-  
 ];
 
 const locations = [
@@ -317,6 +318,16 @@ export default function RegistrationForm(): React.ReactElement {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
+  // Initialize AOS when component mounts
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out',
+      offset: 100,
+    });
+  }, []);
+
   const handleChange = (field: keyof FormData, value: string): void => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     // Clear error when field is edited
@@ -391,6 +402,9 @@ export default function RegistrationForm(): React.ReactElement {
 
       // Instead of router.push, we'll set a success state
       setIsSuccess(true);
+      
+      // Animate success message
+      AOS.refresh();
     } catch (error) {
       console.error("Submission error:", error);
       setErrors({
@@ -452,67 +466,70 @@ export default function RegistrationForm(): React.ReactElement {
     minHeight: "100vh",
   };
 
-  // Main content container style
+  // Main content container style with INCREASED SPACING
   const mainContentStyle: React.CSSProperties = {
     flex: 1,
-    paddingTop: "40px",
-    paddingBottom: "40px",
+    paddingTop: "80px", // Increased from 40px to add more space between navbar and form
+    paddingBottom: "60px",
+    backgroundColor: "#f9fafb", // Light background for better contrast
   };
 
-  // Form container styles
+  // Form container styles with improved design
   const formContainerStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
     gap: "24px",
-    maxWidth: "500px",
+    maxWidth: "550px", // Slightly wider for better form appearance
     margin: "0 auto",
-    padding: "20px",
+    padding: "30px",
     backgroundColor: "#ffffff",
-    borderRadius: "8px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    borderRadius: "12px",
+    boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
   };
 
-  // Header style
+  // Header style with improved design
   const headerStyle: React.CSSProperties = {
-    fontSize: "24px",
+    fontSize: "26px",
     fontWeight: "700",
     textAlign: "center",
-    marginBottom: "20px",
+    marginBottom: "24px",
     background: "linear-gradient(90deg, #667eea, #764ba2)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
   };
 
-  // Success message styles
+  // Success message styles with improved design
   const successContainerStyle: React.CSSProperties = {
     textAlign: "center",
-    padding: "32px",
-    maxWidth: "500px",
+    padding: "40px",
+    maxWidth: "550px",
     margin: "0 auto",
     backgroundColor: "#ffffff",
-    borderRadius: "8px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    borderRadius: "12px",
+    boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
   };
 
   const successHeadingStyle: React.CSSProperties = {
-    fontSize: "24px",
+    fontSize: "28px",
     fontWeight: "bold",
     color: "#16a34a",
-    marginBottom: "16px",
+    marginBottom: "20px",
   };
 
   const successMessageStyle: React.CSSProperties = {
-    marginBottom: "16px",
+    fontSize: "16px",
+    marginBottom: "24px",
   };
 
   const resetButtonStyle: React.CSSProperties = {
     backgroundColor: "#16a34a",
     color: "#ffffff",
-    padding: "8px 16px",
-    borderRadius: "6px",
+    padding: "10px 20px",
+    borderRadius: "8px",
     cursor: "pointer",
     border: "none",
     fontWeight: 500,
+    transition: "all 0.2s ease",
   };
 
   // Field container style
@@ -529,18 +546,18 @@ export default function RegistrationForm(): React.ReactElement {
     marginTop: "4px",
   };
 
-  // Submit button style
+  // Submit button style with improved design
   const submitButtonStyle: React.CSSProperties = {
     width: "100%",
     backgroundColor: "#16a34a",
     color: "#ffffff",
     fontWeight: 500,
-    padding: "10px",
-    marginTop: "16px",
-    borderRadius: "6px",
+    padding: "12px",
+    marginTop: "20px",
+    borderRadius: "8px",
     cursor: "pointer",
     border: "none",
-    transition: "background-color 0.2s",
+    transition: "background-color 0.3s",
   };
 
   // Phone input container style
@@ -558,7 +575,10 @@ export default function RegistrationForm(): React.ReactElement {
 
   // Content for the page with navbar and footer
   const content = isSuccess ? (
-    <div style={successContainerStyle}>
+    <div 
+      style={successContainerStyle} 
+      data-aos="zoom-in" // Add zoom-in animation to success message
+    >
       <h2 style={successHeadingStyle}>Rahmat!</h2>
       <p style={successMessageStyle}>
         Sizning arizangiz muvaffaqiyatli yuborildi.
@@ -581,7 +601,11 @@ export default function RegistrationForm(): React.ReactElement {
       </button>
     </div>
   ) : (
-    <form onSubmit={handleSubmit} style={formContainerStyle}>
+    <form 
+      onSubmit={handleSubmit} 
+      style={formContainerStyle}
+      data-aos="fade-up" // Add fade-up animation to form
+    >
       {errors.general && (
         <Alert variant="destructive">
           <AlertCircle size={16} />
@@ -589,11 +613,19 @@ export default function RegistrationForm(): React.ReactElement {
         </Alert>
       )}
       
-      <h2 style={headerStyle}>
+      <h2 
+        style={headerStyle}
+        data-aos="fade-down" // Add fade-down animation to header
+        data-aos-delay="100" // Delay animation for better sequence
+      >
         Integer Academy kurslari uchun registratsiya qiling:
       </h2>
 
-      <div style={fieldContainerStyle}>
+      <div 
+        style={fieldContainerStyle}
+        data-aos="fade-up" // Add fade-up animation to each field
+        data-aos-delay="200" // Stagger animations
+      >
         <Label
           htmlFor="course"
           style={errors.course ? { color: "#ef4444" } : {}}
@@ -619,7 +651,11 @@ export default function RegistrationForm(): React.ReactElement {
         {errors.course && <p style={errorTextStyle}>{errors.course}</p>}
       </div>
 
-      <div style={fieldContainerStyle}>
+      <div 
+        style={fieldContainerStyle}
+        data-aos="fade-up" 
+        data-aos-delay="300"
+      >
         <Label
           htmlFor="location"
           style={errors.location ? { color: "#ef4444" } : {}}
@@ -644,7 +680,11 @@ export default function RegistrationForm(): React.ReactElement {
         {errors.location && <p style={errorTextStyle}>{errors.location}</p>}
       </div>
 
-      <div style={fieldContainerStyle}>
+      <div 
+        style={fieldContainerStyle}
+        data-aos="fade-up" 
+        data-aos-delay="400"
+      >
         <Label
           htmlFor="fullName"
           style={errors.fullName ? { color: "#ef4444" } : {}}
@@ -662,7 +702,11 @@ export default function RegistrationForm(): React.ReactElement {
         {errors.fullName && <p style={errorTextStyle}>{errors.fullName}</p>}
       </div>
 
-      <div style={fieldContainerStyle}>
+      <div 
+        style={fieldContainerStyle}
+        data-aos="fade-up" 
+        data-aos-delay="500"
+      >
         <Label
           htmlFor="source"
           style={errors.source ? { color: "#ef4444" } : {}}
@@ -687,7 +731,11 @@ export default function RegistrationForm(): React.ReactElement {
         {errors.source && <p style={errorTextStyle}>{errors.source}</p>}
       </div>
 
-      <div style={fieldContainerStyle}>
+      <div 
+        style={fieldContainerStyle}
+        data-aos="fade-up" 
+        data-aos-delay="600"
+      >
         <Label htmlFor="phone" style={errors.phone ? { color: "#ef4444" } : {}}>
           Telefon raqamingiz:
         </Label>
@@ -711,7 +759,11 @@ export default function RegistrationForm(): React.ReactElement {
         {errors.phone && <p style={errorTextStyle}>{errors.phone}</p>}
       </div>
 
-      <div style={fieldContainerStyle}>
+      <div 
+        style={fieldContainerStyle}
+        data-aos="fade-up" 
+        data-aos-delay="700"
+      >
         <Label
           htmlFor="additionalPhone"
           style={errors.additionalPhone ? { color: "#ef4444" } : {}}
@@ -731,7 +783,13 @@ export default function RegistrationForm(): React.ReactElement {
         )}
       </div>
 
-      <Button type="submit" style={submitButtonStyle} disabled={isSubmitting}>
+      <Button 
+        type="submit" 
+        style={submitButtonStyle} 
+        disabled={isSubmitting}
+        data-aos="fade-up" 
+        data-aos-delay="800"
+      >
         {isSubmitting ? "Yuborilmoqda..." : "Ariza qoldirish"}
       </Button>
     </form>

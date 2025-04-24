@@ -1,16 +1,23 @@
-
-import { ChevronRight, Code, Cpu, Globe, Lightbulb } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import CourseCard from './CourseCard';
-import AOS from 'aos';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ChevronRight, Code, Cpu, Globe, Lightbulb } from 'lucide-react'; 
+import { Button } from '@/components/ui/button'; 
+import CourseCard from './CourseCard'; 
+import AOS from 'aos'; 
 import 'aos/dist/aos.css';
-import { useEffect } from 'react';
 
-const CourseSection = () => {
+interface Course {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  color: string;
+  level: string;
+  duration: string;
+  features: string[];
+}
 
-
-
-  const courses = [
+const CourseSection: React.FC = () => {
+  const courses: Course[] = [
     {
       title: "Robototexnikaga kirish",
       description: "Robototexnika asoslarini o'rganing va birinchi robotingizni yarating",
@@ -68,45 +75,42 @@ const CourseSection = () => {
       ]
     }
   ];
-
-
+  
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Animation duration in ms
-      once: true,     // Whether animation should happen only once
+      duration: 1000,
+      once: true,
     });
   }, []);
 
   return (
-
-
-
     <section id="courses" className="py-16 bg-gray-50">
       <div className="container">
-
-      <div data-aos="fade-up">
-
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="section-title">Bizning mashhur kurslarimiz</h2>
-          <p className="section-subtitle">
-            O'zbekistonda kelajak avlod texnologiya innovatorlarini ilhomlantirish uchun yaratilgan amaliy o'quv dasturlarimiz bilan tanishing.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div data-aos="fade-up">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="section-title">Bizning mashhur kurslarimiz</h2>
+            <p className="section-subtitle">
+              O'zbekistonda kelajak avlod texnologiya innovatorlarini ilhomlantirish uchun yaratilgan amaliy o'quv dasturlarimiz bilan tanishing.
+            </p>
+          </div>
           
-          {courses.map((course, index) => (
-            <CourseCard key={index} {...course} />
-          ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Button asChild  variant="outline" size="lg" className="button-hover-effect">
-            <a href="#courses" className="inline-flex items-center ">
-            Barcha kurslarni ko'rish <ChevronRight className="ml-2 h-4 w-4" />
-            </a>
-          </Button>
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">                
+            {courses.map((course, index) => (
+              <CourseCard key={index} {...course} />
+            ))}
+          </div>
+          
+          <div className="mt-12 text-center">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="button-hover-effect"
+            >
+              <Link to="/courses" className="inline-flex items-center">
+                Barcha kurslarni ko'rish <ChevronRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </section>
