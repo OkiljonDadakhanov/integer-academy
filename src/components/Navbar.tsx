@@ -27,7 +27,7 @@ const Navbar = () => {
     } else {
       document.body.style.overflow = "";
     }
-    
+
     return () => {
       document.body.style.overflow = "";
     };
@@ -37,7 +37,9 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 z-50 w-full">
       <nav
         className={`transition-all duration-300 ${
-          isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+          isScrolled
+            ? "bg-white/90 backdrop-blur-md shadow-sm"
+            : "bg-transparent"
         }`}
       >
         <div className="container flex items-center justify-between py-4">
@@ -51,29 +53,29 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <Link
-              to="#courses"
+            <a
+              href="#courses"
               className="text-foreground hover:text-integer-blue transition-colors"
             >
               Kurslar
-            </Link>
-            <Link
-              to="#instructors"
+            </a>
+            <a
+              href="#instructors"
               className="text-foreground hover:text-integer-blue transition-colors"
             >
               O'qituvchilar
-            </Link>
-            <Link
-              to="#contact"
+            </a>
+            <a
+              href="#contact"
               className="text-foreground hover:text-integer-blue transition-colors"
             >
               Bog'lanish
-            </Link>
-            <Link to="/register">
+            </a>
+            <a href="/register">
               <Button className="bg-integer-blue hover:bg-integer-blue/90 button-hover-effect">
                 Ro'yhatdan o'tish
               </Button>
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
