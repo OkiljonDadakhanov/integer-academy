@@ -90,29 +90,29 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="fixed inset-x-0 top-[72px] bottom-0 md:hidden bg-white z-40 overflow-y-auto">
+          <div className="fixed inset-0 top-[72px] md:hidden bg-white z-40 overflow-hidden">
             <div className="container py-4 flex flex-col gap-4">
-              <Link
-                to="/#courses"
+              <a
+                href="#courses"
                 className="text-foreground hover:text-integer-blue transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
                 Kurslar
-              </Link>
-              <Link
-                to="/#instructors"
+              </a>
+              <a
+                href="#instructors"
                 className="text-foreground hover:text-integer-blue transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
                 O'qituvchilar
-              </Link>
-              <Link
-                to="/#contact"
+              </a>
+              <a
+                href="#contact"
                 className="text-foreground hover:text-integer-blue transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
                 Bog'lanish
-              </Link>
+              </a>
               <Link to="/register" onClick={() => setIsOpen(false)}>
                 <Button className="bg-integer-blue hover:bg-integer-blue/90 w-full">
                   Ro'yhatdan o'tish
