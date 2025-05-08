@@ -71,11 +71,11 @@ const Navbar = () => {
             >
               Bog'lanish
             </a>
-            <a href="/register">
+            <Link to="/register">
               <Button className="bg-integer-blue hover:bg-integer-blue/90 button-hover-effect">
                 Ro'yhatdan o'tish
               </Button>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
